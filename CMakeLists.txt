@@ -7,10 +7,10 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE MinSizeRel)
 endif()
 
-if (NOT DEFINED BUILD_SHARED_LIBS)
+#if (NOT DEFINED BUILD_SHARED_LIBS)
     # Keep the previous behavior of the build system, consistent with Meson.
     set(BUILD_SHARED_LIBS ON)
-endif()
+#endif()
 
 #declare target
 add_library( rlottie )
@@ -137,7 +137,7 @@ endif (NOT LIB_INSTALL_DIR)
 #declare source and include files
 add_subdirectory(inc)
 add_subdirectory(src)
-add_subdirectory(example)
+#add_subdirectory(example)
 
 if (LOTTIE_TEST)
     enable_testing()
