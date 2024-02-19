@@ -1,7 +1,18 @@
-cmake_minimum_required( VERSION 3.3 )
+cmake_minimum_required( VERSION 3.15 )
 
 #declare project
 project( rlottie VERSION 0.2 LANGUAGES C CXX ASM)
+
+# Disable C and C++ compiler extensions.
+# C/CXX_EXTENSIONS are ON by default to allow the compilers to use extended
+# variants of the C/CXX language.
+# However, this could expose cross-platform bugs in user code or in the headers
+# of third-party dependencies and thus it is strongly suggested to turn
+# extensions off.
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE MinSizeRel)
@@ -51,16 +62,14 @@ if(MSVC)
     target_compile_options(rlottie
                         PUBLIC
                         PRIVATE
-                            /std:c++14
                             /EHs-c- # disable exceptions
                             /GR- # disable RTTI
-                            /W3
+                            /w # disable warning in Mollo
                         )
 else()
     target_compile_options(rlottie
                         PUBLIC
                         PRIVATE
-                            -std=c++14
                             -fno-exceptions
                             -fno-unwind-tables
                             -fno-asynchronous-unwind-tables
